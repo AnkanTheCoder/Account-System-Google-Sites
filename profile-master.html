@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Master</title>
+</head>
+<body>
+    <h2>Edit Profile</h2>
+    <p>Name: <span id="name"></span> <button onclick="editField('name')">Edit</button></p>
+    <p>Email: <span id="email"></span> <button onclick="editField('email')">Edit</button></p>
+    <p>Password: <span>******</span> <button onclick="editField('password')">Edit</button></p>
+
+    <h2>Your Sponsors</h2>
+    <ul id="sponsorsList"></ul>
+    <button onclick="addSponsor()">Add Sponsor</button>
+
+    <script>
+        function editField(field) {
+            const newValue = prompt("Enter new " + field + ":");
+            if (newValue) {
+                document.getElementById(field).textContent = newValue;
+            }
+        }
+
+        function addSponsor() {
+            const sponsorName = prompt("Enter sponsor name:");
+            if (sponsorName) {
+                const li = document.createElement("li");
+                li.textContent = sponsorName + " ";
+                const btn = document.createElement("button");
+                btn.textContent = "Delete";
+                btn.onclick = () => li.remove();
+                li.appendChild(btn);
+                document.getElementById("sponsorsList").appendChild(li);
+            }
+        }
+    </script>
+</body>
+</html>

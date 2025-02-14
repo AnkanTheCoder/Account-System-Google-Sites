@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background: #f4f4f4; }
+        .profile-container { position: relative; display: inline-block; cursor: pointer; margin-top: 50px; }
+        .profile-pic { width: 50px; height: 50px; border-radius: 50%; }
+        .profile-menu { 
+            display: none; 
+            position: absolute; 
+            top: 60px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            background: white; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            border-radius: 5px; 
+            padding: 10px; 
+            width: 150px;
+            text-align: left;
+        }
+        .profile-menu a { display: block; padding: 8px; text-decoration: none; color: black; }
+        .profile-menu a:hover { background: #f4f4f4; }
+    </style>
+</head>
+<body>
+
+    <h2 id="username"></h2>
+    <div class="profile-container">
+        <img id="profilePic" class="profile-pic" src="profile.png" alt="Profile Picture">
+        <div class="profile-menu" id="profileMenu">
+            <a href="profile-master.html">Profile</a>
+            <a href="profile-master.html">Your Sponsors</a>
+            <a href="login.html" target="_blank" id="logout">Logout</a>
+        </div>
+    </div>
+
+    <script>
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (storedUser) {
+            document.getElementById("username").textContent = storedUser.username;
+            document.getElementById("profilePic").src = localStorage.getItem("profilePic") || "profile.png";
+        } else {
+            alert("No user found. Please log in.");
+            window.location.href = "login.html";
+        }
+
+        document.getElementById("profilePic").addEventListener("click", () => {
+            document.getElementById("profileMenu").style.display = 
+                document.getElementById("profileMenu").style.display === "block" ? "none" : "block";
+        });
+    </script>
+
+</body>
+</html>
